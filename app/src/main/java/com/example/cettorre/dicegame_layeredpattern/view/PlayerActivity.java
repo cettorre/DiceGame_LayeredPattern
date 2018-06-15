@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,6 @@ import com.example.cettorre.dicegame_layeredpattern.application.GameController;
 import com.example.cettorre.dicegame_layeredpattern.domain.Player;
 
 import java.util.List;
-
 
 public class PlayerActivity extends AppCompatActivity {
 
@@ -39,25 +39,37 @@ public class PlayerActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1,playersList);
         listPlayers.setAdapter(adapter);
 
+        listPlayers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(PlayerActivity.this,GameActivity.class);
+                i.putExtra("position", position);
+                startActivity(i);
+            }
+        });
+
 
         btnNewPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String et=etNewPayer.getText().toString();
-                Player player= gameController.createPlayer(et);
-                gameController.addPlayerToList(player);
+                gameController.createPlayer(et);
+                gameController.addPlayerToList(gameController.getPlayer());
 
                 Intent i =new  Intent(PlayerActivity.this, GameActivity.class);
                 int pos=gameController.getPlayersList().size()-1;
                 i.putExtra("position",pos);
                 startActivity(i);
+
+
+
                 Log.e("players", gameController.getPlayersList().toString());
                 Log.e("size",String.valueOf(gameController.getPlayersList().size()));
 
+
+
             }
         });
-
-
     }
 
     public void initComponents(){

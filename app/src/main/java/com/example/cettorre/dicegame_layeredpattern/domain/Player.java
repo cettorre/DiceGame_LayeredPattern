@@ -25,8 +25,9 @@ public class Player {
         return name;
     }
 
-    public void addGame(Game game){
+    public void addGame(){
         try{
+            new Game();
             if (game==null) throw new Exception();
             games.add(game);
         }catch (Exception e){
@@ -49,7 +50,7 @@ public class Player {
         game.getDice2().rollDice();
 
         Log.e("game_p_60",game.toString());
-        addGame(game);
+        addGame();
         Log.e("games_p_62",games.toString());
 
         return game.hasWon();}
