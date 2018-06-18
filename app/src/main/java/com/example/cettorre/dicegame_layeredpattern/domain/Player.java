@@ -11,11 +11,8 @@ import java.util.List;
 public class Player {
 
     private String name;
-    private Game game;
-    double finalScore;
 
-
-    private ArrayList<Game> games=new ArrayList<>();//change
+    private List<Game> games=new ArrayList<>();
 
     public Player(String name){
         this.name=name;
@@ -25,43 +22,18 @@ public class Player {
         return name;
     }
 
-    public void addGame(){
-        try{
-            new Game();
-            if (game==null) throw new Exception();
-            games.add(game);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
     public List<Game> getAllGames() {return games;}
 
-    public void resetGamesList(){games.clear();}
-
-    public Game getGame() {
-        return game;
+    public boolean rollDices(){
+        Game game= new Game();
+        games.add(game);
+        game.rollDices();
+        return game.hasWon();
     }
 
-    public boolean rollDices() {
-        game= new Game();
-        game.getDice1().rollDice();
-        game.getDice2().rollDice();
-
-        Log.e("game_p_60",game.toString());
-        addGame();
-        Log.e("games_p_62",games.toString());
-
-        return game.hasWon();}
-
-    public int getDice1Value() { return game.getDice1().getValue();}
-
-    public int getDice2Value() {return game.getDice2().getValue();}
-
-    public Game getCurrentGame(){
-
-        return games.get(games.size()-1);
+    public Game getCurrentGame() throws Exception {
+        if(games.isEmpty()) throw new Exception();
+        return games.get(games.size() - 1);
     }
 
     public double getPlayerRanking() {
@@ -72,17 +44,6 @@ public class Player {
             }
         }
         return wins / games.size()*100;
-    }
-
-    public double getFinalScore() {
-        double wins = 0.0;
-        for (Game game : games) {
-            if (game.hasWon()) {
-                wins++;
-            }
-        }
-        finalScore=wins / games.size()*100;
-        return finalScore;
     }
 
     @Override

@@ -6,10 +6,12 @@ public class GameDTO {
 
     private int diceValue1;
     private int diceValue2;
+    private boolean hasWon;
 
     public GameDTO(Game game) {
         this.diceValue1 = game.getDice1().getValue();
         this.diceValue2 = game.getDice2().getValue();
+        this.hasWon=game.hasWon();
     }
 
     public int getDiceValue1() {
@@ -18,5 +20,9 @@ public class GameDTO {
 
     public int getDiceValue2() {
         return diceValue2;
+    }
+
+    public boolean isHasWon() {
+        return hasWon;
     }
 }

@@ -15,6 +15,11 @@ public class Game {
         return dice1.getValue()+dice2.getValue();
     }
 
+    public void rollDices(){
+        dice1.rollDice();
+        dice2.rollDice();
+    }
+
     public boolean hasWon() {
         return getSumDices()==7;
     }
