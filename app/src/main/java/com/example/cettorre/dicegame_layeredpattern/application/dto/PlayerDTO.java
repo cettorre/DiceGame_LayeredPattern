@@ -9,7 +9,8 @@ public class PlayerDTO {
     private double percentageOfVictories;
 
 
-    public PlayerDTO(Player player) {
+    public PlayerDTO(Player player) throws Exception {
+        if(player==null)throw new Exception();
         this.playerName = player.getName();
         this.numberOfRolls = player.getAllGames().size();
         this.percentageOfVictories = player.getPlayerRanking();

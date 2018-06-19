@@ -8,7 +8,8 @@ public class GameDTO {
     private int diceValue2;
     private boolean hasWon;
 
-    public GameDTO(Game game) {
+    public GameDTO(Game game) throws Exception {
+        if(game==null)throw new Exception();
         this.diceValue1 = game.getDice1().getValue();
         this.diceValue2 = game.getDice2().getValue();
         this.hasWon=game.hasWon();

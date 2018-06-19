@@ -1,8 +1,5 @@
 package com.example.cettorre.dicegame_layeredpattern.domain;
 
-import android.util.Log;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,10 +41,5 @@ public class Player {
             }
         }
         return wins / games.size()*100;
-    }
-
-    @Override
-    public String toString() {
-        return  name ;
     }
 }
